@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -21,8 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.modifier.modifierLocalConsumer
@@ -44,24 +47,35 @@ fun MessagingScreen() {
         var texts by remember {
             mutableStateOf(listOf<String>())
         }
-        //val messagesList: MutableList<String> = mutableListOf("Hello ", "Hi" , "What's up")
 
-//    Column(modifier= Modifier.fillMaxSize()) {
-//        Card() {
-//            chatbox(message = message)
-//            chatbox(message = message)
-//            chatbox(message = message)
-//            chatbox(message = message)
-//            chatbox(message = message)
-//        }
-
-        LazyColumn(modifier = Modifier.weight(1f) , verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.End) {
+        LazyColumn(modifier = Modifier
+            .weight(1f)
+            .fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
             items(texts) { messages ->
+                Row(modifier = Modifier.fillMaxWidth() , horizontalArrangement = Arrangement.End) {
+                    Card(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .background(Color.Blue)
+                            .fillMaxWidth(0.45f)
+                    ) {
+                        Text(
+                            text = messages,
+                            fontWeight = FontWeight(500),
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
+                        )
+                    }
+                }
                 Card(
                     modifier = Modifier
+                        .fillMaxWidth(0.5f)
                         .padding(16.dp)
+                        .background(Color.Magenta)
                 ) {
-                    Text(text = messages)
+                    Text(text = messages, fontWeight = FontWeight(500), modifier = Modifier
+                        .padding(8.dp) .background(Color(66 ,133, 244, 43, )))
                 }
             }
         }
@@ -91,8 +105,8 @@ fun MessagingScreen() {
             }
         }
     }
-@Composable
-fun Chatbox(message: String){
-    Text(text = message, fontSize = 32.sp, fontWeight = FontWeight(400))
-}
+//@Composable
+//fun Chatbox(message: String){
+//    Text(text = message, fontSize = 32.sp, fontWeight = FontWeight(400))
+//}
 
